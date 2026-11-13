@@ -10,9 +10,9 @@ window.CONFIG = {
     nombre: "Kalid Studio",
     especialidad: "Sesiones fotográficas",
     ciudad: "CDMX",
-    whatsapp: "+52 55 0000 0000",
-    correo: "hola@tudominio.com",
-    instagram: "@tuusuario",
+    whatsapp: "+52 4494138054",
+    correo: "kalidfotografia@gmail.com",
+    instagram: "@aaronkalid",
   },
 
   moneda: "MXN",
@@ -111,9 +111,9 @@ window.CONFIG = {
 
   // Datos bancarios que se muestran en las instrucciones de pago.
   pago: {
-    banco: "Nombre del banco",
-    titular: "Nombre del titular",
-    clabe: "000000000000000000",
+    banco: "Banorte",
+    titular: "Aaron Kalid Gallegos Casas",
+    clabe: "072010002847783454",
     concepto: "Tu nombre completo",
   },
 
