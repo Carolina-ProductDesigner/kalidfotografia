@@ -222,11 +222,10 @@
   }
 
   /* ---------- Disponibilidad ---------- */
-  async function cargarDisponibilidad() {
-    state.cargando = true; state.error = null;
-    renderCalendario();
+  async function cargarDisponibilidad(silencioso) {
+    if (!silencioso || !state.desde) { state.cargando = true; state.error = null; renderCalendario(); }
     try {
-      const data = DEMO ? await demoDisponibilidad() : await (await fetch(`${C.appsScriptUrl}?action=disponibilidad`)).json();
+      const data = DEMO ? await demoDisponibilidad() : await (await fetch(`${C.appsScriptUrl}?action=disponibilidad&t=${Date.now()}`, { cache: "no-store" })).json();
       if (!data.ok) throw new Error(data.error || "No se pudo cargar la agenda");
       state.porUbicacion = {};
       Object.entries(data.ubicaciones || {}).forEach(([k, v]) => (state.porUbicacion[normLugar(k)] = v));
@@ -235,6 +234,7 @@
       aplicarUbicacion(false);
     } catch (err) {
       console.error(err);
+      if (silencioso && state.desde) return; // si falla un refresco en segundo plano, se queda lo que ya había
       state.error = "No pudimos cargar los horarios. Revisa tu conexión e intenta de nuevo.";
     }
     state.cargando = false;
@@ -265,7 +265,7 @@
       else {
         box.append(el("span", null, state.error));
         const b = el("button", "btn btn-sm btn-ghost", "Reintentar");
-        b.type = "button"; b.onclick = cargarDisponibilidad; box.append(b);
+        b.type = "button"; b.onclick = () => cargarDisponibilidad(); box.append(b);
       }
       cal.append(box);
       return;
@@ -547,5 +547,10 @@
   });
   actualizarBoton();
   $("#booking-form").addEventListener("submit", enviar);
+  // Vuelve a pedir los horarios libres cada 2 min y al regresar a la pestaña
+  if (!DEMO) {
+    setInterval(() => { if (!document.hidden) cargarDisponibilidad(true); }, 120000);
+    document.addEventListener("visibilitychange", () => { if (!document.hidden) cargarDisponibilidad(true); });
+  }
   $("#again").addEventListener("click", reiniciar);
 })();
