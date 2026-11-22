@@ -111,9 +111,10 @@ window.CONFIG = {
 
   // Datos bancarios que se muestran en las instrucciones de pago.
   pago: {
-    banco: "Nombre del banco",
-    titular: "Nombre del titular",
-    clabe: "000000000000000000",
+    banco: "BANORTE",
+    titular: "Aarón Kalid Gallegos Casas",
+    clabe: "072010002847783454",
+    tarjeta: "4189 1400 1356 2458",
     concepto: "Tu nombre completo",
   },
 
