@@ -9,10 +9,9 @@ window.CONFIG = {
   negocio: {
     nombre: "Kalid Studio",
     especialidad: "Sesiones fotográficas",
-    ciudad: "CDMX",
-    whatsapp: "+52 55 0000 0000",
-    correo: "hola@tudominio.com",
-    instagram: "@tuusuario",
+    ciudad: "CDMX | Aguascalientes",
+    correo: "kalidfotografia@gmail,com",
+    instagram: "@aaronkalid",
   },
 
   moneda: "MXN",
